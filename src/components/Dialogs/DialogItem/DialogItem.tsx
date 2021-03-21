@@ -1,22 +1,20 @@
 import React from "react";
 import s from "../Dialogs.module.css";
 import {NavLink} from "react-router-dom";
+import {DialogItemsType} from "../../../redux/state"
 
-type DialogItemType = {
-    id: number
-    path: string
-    name: string
-}
-type DialogItemPropsType = {
-    DialogsItems: Array<DialogItemType>
+type DialogsItemsType = {
+    dialogsItems: Array<DialogItemsType>
 }
 
-const DialogItem = (props:DialogItemPropsType) => {
+const DialogItem = (props: DialogsItemsType) => {
     return (
-        <div className={s.dialog}>
+        <div>
             {
-                props.DialogsItems.map(d =>
-                    <NavLink key={d.id} exact to={d.path} activeClassName={s.active}>{d.name}</NavLink>
+                props.dialogsItems.map (d =>
+                    <div key={d.id} className={s.dialog}>
+                    <NavLink exact to={d.path} activeClassName={s.active}>{d.name}</NavLink>
+                    </div>
                 )
             }
         </div>

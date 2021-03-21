@@ -1,0 +1,14 @@
+.navbar {
+    padding-left: 10px;
+    grid-area: n;
+    background: blue;
+
+}
+
+.navbar a {
+    text-decoration: none;
+    color: white;
+}
+.navbar a.active {
+    color: gold;
+}

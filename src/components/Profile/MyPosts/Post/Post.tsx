@@ -1,22 +1,28 @@
 import React from "react";
-import s from './MyPosts.module.css'
+import s from './Post.module.css'
+import {PostType} from '../../../../redux/state'
 
-const MyPosts = () => {
+
+type PostsPropsType = {
+    posts: Array<PostType>
+}
+
+const Post = (props: PostsPropsType) => {
     return (
-        <div>
-            My Posts
-            <div>
-                New Post
-            </div>
-            <div>
-                <div className={s.item}>
-                    Post 1
-                </div>
-                <div>
-                    Post 2
-                </div>
-            </div>
+        <div className={s.item}>
+            {
+                props.posts.map( p =>
+                    <div className={s.post} key={p.id}>
+                        <img src='https://lumpics.ru/wp-content/uploads/2017/11/Programmyi-dlya-sozdaniya-avatarok.png'
+                             alt='avatar'/>
+                        <span>{p.message}</span>
+                        <div>
+                            <span>{p.likes} like</span>
+                        </div>
+                    </div>
+                )
+            }
         </div>
     )
 }
-export default MyPosts;
+export default Post;
