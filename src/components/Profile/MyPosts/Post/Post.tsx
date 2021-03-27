@@ -11,7 +11,7 @@ const Post = (props: PostsPropsType) => {
     return (
         <div className={s.item}>
             {
-                props.posts.map( p =>
+                props.posts.map(p =>
                     <div className={s.post} key={p.id}>
                         <img src='https://lumpics.ru/wp-content/uploads/2017/11/Programmyi-dlya-sozdaniya-avatarok.png'
                              alt='avatar'/>

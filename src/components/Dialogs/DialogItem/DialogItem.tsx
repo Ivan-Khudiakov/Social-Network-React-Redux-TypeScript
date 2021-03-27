@@ -11,13 +11,14 @@ const DialogItem = (props: DialogsItemsType) => {
     return (
         <div>
             {
-                props.dialogsItems.map (d =>
+                props.dialogsItems.map(d =>
                     <div key={d.id} className={s.dialog}>
-                    <NavLink exact to={d.path} activeClassName={s.active}>{d.name}</NavLink>
+                        <NavLink exact to={d.path} activeClassName={s.active}>{d.name}</NavLink>
                     </div>
                 )
             }
         </div>
     )
 }
+
 export default DialogItem
