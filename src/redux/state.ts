@@ -1,3 +1,9 @@
+const ADD_POST = "ADD-POST"
+const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
+const ADD_MESSAGE = "ADD-MESSAGE"
+const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT"
+
+
 export type PostType = {
     id: number
     message: string
@@ -17,6 +23,7 @@ export type ProfilePageType = {
     posts: Array<PostType>
 }
 export type DialogPageType = {
+    textForNewMessage: string
     arrDialogsItems: Array<DialogItemsType>
     arrDialogsMessages: Array<DialogMessagesType>
 }
@@ -32,18 +39,34 @@ export type StoreType = {
     dispatch: (action: ActionsType) => void
 }
 
-export type ActionsType = ReturnType<typeof AddPostAC> | ReturnType<typeof UpdateNewPostTExtAC>
+export type ActionsType =
+    ReturnType<typeof AddPostAC> |
+    ReturnType<typeof UpdateNewPostTextAC> |
+    ReturnType<typeof AddMessageAC> |
+    ReturnType<typeof UpdateNewMessageAC>
 
 export const AddPostAC = (postText: string) => {
     return {
-        type: "ADD-POST",
+        type: ADD_POST,
         postText: postText
     } as const
 }
-export const UpdateNewPostTExtAC = (newText: string) => {
+export const UpdateNewPostTextAC = (textForNewPost: string) => {
     return{
-        type: "UPDATE-NEW-POST-TEXT",
-        newText: newText
+        type: UPDATE_NEW_POST_TEXT,
+        textForNewPost: textForNewPost
+    } as const
+}
+export const AddMessageAC = (messageText: string) => {
+    return {
+        type: ADD_MESSAGE,
+        messageText: messageText
+    } as const
+}
+export const UpdateNewMessageAC = (textForNewMessage: string) => {
+    return {
+        type: UPDATE_NEW_MESSAGE_TEXT,
+        textForNewMessage: textForNewMessage
     } as const
 }
 
@@ -60,6 +83,7 @@ let store: StoreType = {
             ]
         },
         dialogsPage: {
+            textForNewMessage: '',
             arrDialogsItems: [
                 {id: 1, path: '/dialogs/1', name: 'Katya'},
                 {id: 2, path: '/dialogs/2', name: 'Tima'},
@@ -73,7 +97,7 @@ let store: StoreType = {
                 {id: 3, text: 'Hello!'},
                 {id: 4, text: 'Hello!'},
                 {id: 5, text: 'Hello!'},
-            ]
+            ],
         }
     },
     _rerenderEntireTree() {
@@ -87,7 +111,7 @@ let store: StoreType = {
     },
 
     dispatch(action) {
-        if(action.type === "ADD-POST") {
+        if(action.type === ADD_POST) {
             let newPost: PostType = {
                 id: new Date().getTime(),
                 message: action.postText,
@@ -96,8 +120,19 @@ let store: StoreType = {
             this._state.profilePage.posts.push(newPost)
             this._state.profilePage.textForNewPost = ''
             this._rerenderEntireTree()
-        } else if (action.type === "UPDATE-NEW-POST-TEXT") {
-            this._state.profilePage.textForNewPost = action.newText
+        } else if (action.type === UPDATE_NEW_POST_TEXT) {
+            this._state.profilePage.textForNewPost = action.textForNewPost
+            this._rerenderEntireTree()
+        } else if (action.type === ADD_MESSAGE) {
+            let newMessage: DialogMessagesType = {
+                id: new Date().getTime(),
+                text: action.messageText
+            }
+            this._state.dialogsPage.arrDialogsMessages.push(newMessage)
+            this._state.dialogsPage.textForNewMessage = ''
+            this._rerenderEntireTree()
+        } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
+            this._state.dialogsPage.textForNewMessage = action.textForNewMessage
             this._rerenderEntireTree()
         }
 

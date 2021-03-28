@@ -1,7 +1,7 @@
 import React, {ChangeEvent} from "react";
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {ActionsType, AddPostAC, PostType, UpdateNewPostTExtAC} from "../../../redux/state";
+import {ActionsType, AddPostAC, PostType, UpdateNewPostTextAC} from "../../../redux/state";
 
 export type MyPostPropsType = {
     posts: Array<PostType>
@@ -16,7 +16,7 @@ const MyPosts = (props: MyPostPropsType) => {
     }
     const changeText = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let text = e.currentTarget.value
-        props.dispatch(UpdateNewPostTExtAC(text))
+        props.dispatch(UpdateNewPostTextAC(text))
     }
 
     return (
