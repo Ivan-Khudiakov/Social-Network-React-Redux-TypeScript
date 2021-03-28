@@ -1,8 +1,5 @@
-const ADD_POST = "ADD-POST"
-const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
-const ADD_MESSAGE = "ADD-MESSAGE"
-const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT"
-
+import {AddPostAC, profileReducer, UpdateNewPostTextAC} from "./profileReducer";
+import {AddMessageAC, dialogsReducer, UpdateNewMessageAC} from "./dialogsReducer";
 
 export type PostType = {
     id: number
@@ -45,32 +42,6 @@ export type ActionsType =
     ReturnType<typeof AddMessageAC> |
     ReturnType<typeof UpdateNewMessageAC>
 
-export const AddPostAC = (postText: string) => {
-    return {
-        type: ADD_POST,
-        postText: postText
-    } as const
-}
-export const UpdateNewPostTextAC = (textForNewPost: string) => {
-    return{
-        type: UPDATE_NEW_POST_TEXT,
-        textForNewPost: textForNewPost
-    } as const
-}
-export const AddMessageAC = (messageText: string) => {
-    return {
-        type: ADD_MESSAGE,
-        messageText: messageText
-    } as const
-}
-export const UpdateNewMessageAC = (textForNewMessage: string) => {
-    return {
-        type: UPDATE_NEW_MESSAGE_TEXT,
-        textForNewMessage: textForNewMessage
-    } as const
-}
-
-
 let store: StoreType = {
     _state: {
         profilePage: {
@@ -86,9 +57,9 @@ let store: StoreType = {
             textForNewMessage: '',
             arrDialogsItems: [
                 {id: 1, path: '/dialogs/1', name: 'Katya'},
-                {id: 2, path: '/dialogs/2', name: 'Tima'},
-                {id: 3, path: '/dialogs/3', name: 'Galya'},
-                {id: 4, path: '/dialogs/4', name: 'Yura'},
+                {id: 2, path: '/dialogs/2', name: 'Tim'},
+                {id: 3, path: '/dialogs/3', name: 'Galina'},
+                {id: 4, path: '/dialogs/4', name: 'Yuri'},
                 {id: 5, path: '/dialogs/5', name: 'Vladimir'},
             ],
             arrDialogsMessages: [
@@ -111,31 +82,9 @@ let store: StoreType = {
     },
 
     dispatch(action) {
-        if(action.type === ADD_POST) {
-            let newPost: PostType = {
-                id: new Date().getTime(),
-                message: action.postText,
-                likes: 0
-            }
-            this._state.profilePage.posts.push(newPost)
-            this._state.profilePage.textForNewPost = ''
-            this._rerenderEntireTree()
-        } else if (action.type === UPDATE_NEW_POST_TEXT) {
-            this._state.profilePage.textForNewPost = action.textForNewPost
-            this._rerenderEntireTree()
-        } else if (action.type === ADD_MESSAGE) {
-            let newMessage: DialogMessagesType = {
-                id: new Date().getTime(),
-                text: action.messageText
-            }
-            this._state.dialogsPage.arrDialogsMessages.push(newMessage)
-            this._state.dialogsPage.textForNewMessage = ''
-            this._rerenderEntireTree()
-        } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
-            this._state.dialogsPage.textForNewMessage = action.textForNewMessage
-            this._rerenderEntireTree()
-        }
-
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._rerenderEntireTree()
     }
 }
 
