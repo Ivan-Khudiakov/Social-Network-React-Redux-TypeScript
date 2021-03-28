@@ -1,6 +1,6 @@
 import React from "react";
 import s from '../Dialogs.module.css'
-import {DialogMessagesType} from "../../../redux/state";
+import {DialogMessagesType} from "../../../redux/store";
 
 type DialogMessageType = {
     dialogsMessages: Array<DialogMessagesType>
