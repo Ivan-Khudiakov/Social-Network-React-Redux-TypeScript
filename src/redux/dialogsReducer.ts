@@ -3,7 +3,7 @@ import {ActionsType, DialogMessagesType, DialogPageType} from "./store";
 export const ADD_MESSAGE = "ADD-MESSAGE"
 export const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT"
 
-const initialState = {
+export const initialState = {
     textForNewMessage: '',
     arrDialogsItems: [
         {id: 1, path: '/dialogs/1', name: 'Katya'},
@@ -23,26 +23,30 @@ const initialState = {
 
 export const dialogsReducer = (state: DialogPageType = initialState, action: ActionsType) => {
     switch (action.type) {
-        case ADD_MESSAGE:
+        case ADD_MESSAGE: {
             let newMessage: DialogMessagesType = {
                 id: new Date().getTime(),
-                text: action.messageText
+                text: state.textForNewMessage
             }
-            state.arrDialogsMessages.push(newMessage)
-            state.textForNewMessage = ''
-            return state
-        case UPDATE_NEW_MESSAGE_TEXT:
-            state.textForNewMessage = action.textForNewMessage
-            return state
+            let stateCopy = {...state}
+            stateCopy.arrDialogsMessages = [...state.arrDialogsMessages]
+            stateCopy.arrDialogsMessages.push(newMessage)
+            stateCopy.textForNewMessage = ''
+            return stateCopy
+        }
+        case UPDATE_NEW_MESSAGE_TEXT: {
+            let stateCopy = {...state}
+            stateCopy.textForNewMessage = action.textForNewMessage
+            return stateCopy
+        }
         default:
             return state
     }
 }
 
-export const AddMessageAC = (messageText: string) => {
+export const AddMessageAC = () => {
     return {
-        type: ADD_MESSAGE,
-        messageText: messageText
+        type: ADD_MESSAGE
     } as const
 }
 export const UpdateNewMessageAC = (textForNewMessage: string) => {
