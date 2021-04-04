@@ -19,6 +19,9 @@ const Navbar = () => {
                 <a href='/'>Music</a>
             </div>
             <div>
+                <NavLink to='/users' activeClassName={s.active}>Users</NavLink>
+            </div>
+            <div>
                 <a href='/'>Settings</a>
             </div>
         </div>

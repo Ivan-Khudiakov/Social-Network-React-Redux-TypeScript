@@ -1,5 +1,7 @@
 import {AddPostAC, profileReducer, UpdateNewPostTextAC} from "./profileReducer";
 import {AddMessageAC, dialogsReducer, UpdateNewMessageAC} from "./dialogsReducer";
+import {followAC, setUsersAC, unfollowAC} from "./usersReducer";
+import {v1} from "uuid";
 
 export type PostType = {
     id: number
@@ -15,6 +17,18 @@ export type DialogMessagesType = {
     id: number
     text: string
 }
+export type LocationUsersType = {
+    city: string
+    country: string
+}
+export type UserType = {
+    id: string
+    fotoUrl: string
+    followed: boolean
+    fullName: string
+    status: string
+    location: LocationUsersType
+}
 export type ProfilePageType = {
     textForNewPost: string
     posts: Array<PostType>
@@ -24,9 +38,13 @@ export type DialogPageType = {
     arrDialogsItems: Array<DialogItemsType>
     arrDialogsMessages: Array<DialogMessagesType>
 }
+export type UsersPageType = {
+    users: Array<UserType>
+}
 export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogPageType
+    userPage: UsersPageType
 }
 export type StoreType = {
     _state: RootStateType
@@ -40,7 +58,12 @@ export type ActionsType =
     ReturnType<typeof AddPostAC> |
     ReturnType<typeof UpdateNewPostTextAC> |
     ReturnType<typeof AddMessageAC> |
-    ReturnType<typeof UpdateNewMessageAC>
+    ReturnType<typeof UpdateNewMessageAC> |
+    ReturnType<typeof followAC> |
+    ReturnType<typeof unfollowAC> |
+    ReturnType<typeof setUsersAC>
+
+
 
 let store: StoreType = {
     _state: {
@@ -69,6 +92,14 @@ let store: StoreType = {
                 {id: 4, text: 'Hello!'},
                 {id: 5, text: 'Hello!'},
             ],
+        },
+        userPage: {
+            users:  [
+                {id: v1(), fotoUrl: "https://r-iris.ru/images/photos/medium/article150.jpg", followed: true, fullName: "Dmitry", status: "I am a boss!", location: {city: "Minsk", country: "Belarus"}},
+                {id: v1(), fotoUrl: "https://r-iris.ru/images/photos/medium/article150.jpg", followed: false, fullName: "Andrey", status: "I am a boss too!", location: {city: "Moscow", country: "Russia"}},
+                {id: v1(), fotoUrl: "https://r-iris.ru/images/photos/medium/article150.jpg", followed: true, fullName: "Valera", status: "I am a boss too!", location: {city: "Kiev", country: "Ukraine"}},
+                {id: v1(), fotoUrl: "https://r-iris.ru/images/photos/medium/article150.jpg", followed: false, fullName: "Yura", status: "I am a boss too!", location: {city: "Dallas", country: "USA"}},
+            ]
         }
     },
     _rerenderEntireTree() {
