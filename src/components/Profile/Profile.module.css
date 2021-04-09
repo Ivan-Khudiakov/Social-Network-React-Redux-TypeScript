@@ -1,6 +1,7 @@
 .profile {
     grid-area: c;
     background: gold;
+    padding: 10px;
 }
 .profile img {
     width: 100%;

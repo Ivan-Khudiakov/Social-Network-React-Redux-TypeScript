@@ -27,21 +27,23 @@ type UserPagePropsType = {
 }
 
 export const Users = (props: UserPagePropsType) => {
-    if (props.users.length === 0) {
-        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
-            props.setUsers(response.data.items)
-        })
+    let getUsers = () => {
+        if (props.users.length === 0) {
+            axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+                props.setUsers(response.data.items)
+            })
+        }
     }
 
     return (
-        <div>
+        <div className={style.users}>
+            <button onClick={getUsers}>Get Users</button>
             {
                 props.users.map(u =>
                     <div key={u.id}>
                     <span>
                         <div>
-                            <img className={style.avatar} src={u.photos.small !== null ? u.photos.small : userPhoto }
-                                 />
+                            <img className={style.avatar} src={u.photos.small !== null ? u.photos.small : userPhoto } alt={"Avatar"}/>
                         </div>
                         <div>
                             {
