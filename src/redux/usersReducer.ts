@@ -1,20 +1,14 @@
-import {ActionsType, UsersPageType} from "./store";
-import {v1} from "uuid";
+import {ActionsType} from "./store";
+import {UsersType, UserType} from "../components/Users/Users";
 
 const FOLLOW = "FOLLOW"
 const UNFOLLOW = "UNFOLLOW"
 const SET_USERS = "SET_USERS"
 
-
-const initialState = {
-    users:  [
-        {id: v1(), fotoUrl: "https://r-iris.ru/images/photos/medium/article150.jpg", followed: true, fullName: "Dmitry", status: "I am a boss!", location: {city: "Minsk", country: "Belarus"}},
-        {id: v1(), fotoUrl: "https://r-iris.ru/images/photos/medium/article150.jpg", followed: false, fullName: "Andrey", status: "I am a boss too!", location: {city: "Moscow", country: "Russia"}},
-        {id: v1(), fotoUrl: "https://r-iris.ru/images/photos/medium/article150.jpg", followed: true, fullName: "Valera", status: "I am a boss too!", location: {city: "Kiev", country: "Ukraine"}},
-        {id: v1(), fotoUrl: "https://r-iris.ru/images/photos/medium/article150.jpg", followed: false, fullName: "Yura", status: "I am a boss too!", location: {city: "Dallas", country: "USA"}},
-    ]
+const initialState: UsersType = {
+    users: []
 }
-export const usersReducer = (state: UsersPageType = initialState, action: ActionsType) => {
+export const usersReducer = (state= initialState, action: ActionsType):UsersType  => {
     switch (action.type) {
         case FOLLOW:
             return {
@@ -33,25 +27,25 @@ export const usersReducer = (state: UsersPageType = initialState, action: Action
                     return u
                 })}
         case SET_USERS:
-            return {...state, users: [action.users]}
+            return {...state, users: action.users}
         default:
             return state
     }
 }
 
-export const followAC = (id: string) => {
+export const followAC = (id: number) => {
     return {
         type: FOLLOW,
         id: id
     } as const
 }
-export const unfollowAC = (id: string) => {
+export const unfollowAC = (id: number) => {
     return{
         type: UNFOLLOW,
         id: id
     } as const
 }
-export const setUsersAC = (users: UsersPageType) => {
+export const setUsersAC = (users: UserType[]) => {
     return{
         type: SET_USERS,
         users: users

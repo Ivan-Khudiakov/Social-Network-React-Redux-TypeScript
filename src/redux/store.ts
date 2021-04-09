@@ -17,15 +17,15 @@ export type DialogMessagesType = {
     id: number
     text: string
 }
-export type LocationUsersType = {
+type LocationUsersType = {
     city: string
     country: string
 }
-export type UserType = {
-    id: string
-    fotoUrl: string
+type UserType = {
+    id: number
+    photos: any
     followed: boolean
-    fullName: string
+    name: string
     status: string
     location: LocationUsersType
 }
@@ -38,7 +38,7 @@ export type DialogPageType = {
     arrDialogsItems: Array<DialogItemsType>
     arrDialogsMessages: Array<DialogMessagesType>
 }
-export type UsersPageType = {
+type UsersPageType = {
     users: Array<UserType>
 }
 export type RootStateType = {
@@ -95,10 +95,10 @@ let store: StoreType = {
         },
         userPage: {
             users:  [
-                {id: v1(), fotoUrl: "https://r-iris.ru/images/photos/medium/article150.jpg", followed: true, fullName: "Dmitry", status: "I am a boss!", location: {city: "Minsk", country: "Belarus"}},
-                {id: v1(), fotoUrl: "https://r-iris.ru/images/photos/medium/article150.jpg", followed: false, fullName: "Andrey", status: "I am a boss too!", location: {city: "Moscow", country: "Russia"}},
-                {id: v1(), fotoUrl: "https://r-iris.ru/images/photos/medium/article150.jpg", followed: true, fullName: "Valera", status: "I am a boss too!", location: {city: "Kiev", country: "Ukraine"}},
-                {id: v1(), fotoUrl: "https://r-iris.ru/images/photos/medium/article150.jpg", followed: false, fullName: "Yura", status: "I am a boss too!", location: {city: "Dallas", country: "USA"}},
+                {id: 1, photos: "https://r-iris.ru/images/photos/medium/article150.jpg", followed: true, name: "Dmitry", status: "I am a boss!", location: {city: "Minsk", country: "Belarus"}},
+                {id: 2, photos: "https://r-iris.ru/images/photos/medium/article150.jpg", followed: false, name: "Andrey", status: "I am a boss too!", location: {city: "Moscow", country: "Russia"}},
+                {id: 3, photos: "https://r-iris.ru/images/photos/medium/article150.jpg", followed: true, name: "Valera", status: "I am a boss too!", location: {city: "Kiev", country: "Ukraine"}},
+                {id: 4, photos: "https://r-iris.ru/images/photos/medium/article150.jpg", followed: false, name: "Yura", status: "I am a boss too!", location: {city: "Dallas", country: "USA"}},
             ]
         }
     },
