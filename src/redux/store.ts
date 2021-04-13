@@ -1,6 +1,13 @@
 import {AddPostAC, profileReducer, UpdateNewPostTextAC} from "./profileReducer";
 import {AddMessageAC, dialogsReducer, UpdateNewMessageAC} from "./dialogsReducer";
-import {followAC, setCurrentPageAC, setTotalUsersCountAC, setUsersAC, unfollowAC} from "./usersReducer";
+import {
+    followAC,
+    setCurrentPageAC,
+    setIsFetchingAC,
+    setTotalUsersCountAC,
+    setUsersAC,
+    unfollowAC
+} from "./usersReducer";
 
 export type PostType = {
     id: number
@@ -62,7 +69,9 @@ export type ActionsType =
     ReturnType<typeof unfollowAC> |
     ReturnType<typeof setUsersAC> |
     ReturnType<typeof setCurrentPageAC> |
-    ReturnType<typeof setTotalUsersCountAC>
+    ReturnType<typeof setTotalUsersCountAC> |
+    ReturnType<typeof setIsFetchingAC>
+
 
 
 let store: StoreType = {
