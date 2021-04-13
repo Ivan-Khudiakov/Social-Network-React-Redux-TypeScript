@@ -2,6 +2,9 @@
     background: gold;
     padding: 10px;
 }
+.selectedPage {
+    font-weight: bold;
+}
 .avatar {
     height: 50px;
 }
