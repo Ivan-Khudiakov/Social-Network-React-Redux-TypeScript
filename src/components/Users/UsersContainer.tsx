@@ -1,12 +1,11 @@
 import {connect} from "react-redux";
-import {Dispatch} from "redux";
 import {
-    followAC,
-    setCurrentPageAC,
-    setIsFetchingAC,
-    setTotalUsersCountAC,
-    setUsersAC,
-    unfollowAC,
+    follow,
+    setCurrentPage,
+    setIsFetching,
+    setTotalUsersCount,
+    setUsers,
+    unfollow,
     UserType
 } from "../../redux/usersReducer";
 import preloader from "../../assets/images/preloader.gif"
@@ -37,7 +36,7 @@ export class UsersContainer extends React.Component<UserPagePropsType> {
     render() {
         return (
             <>
-                {this.props.isFetching ? <img src={preloader}/> : null}
+                {this.props.isFetching ? <img src={preloader} alt={"Loading..."}/> : null}
                 <Users totalUsersCount={this.props.totalUsersCount}
                         pageSize={this.props.pageSize}
                         currentPage={this.props.currentPage}
@@ -77,29 +76,13 @@ const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
         isFetching: state.usersPage.isFetching
     }
 }
-const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
-    return {
-        follow: (id: number) => {
-            dispatch(followAC(id))
-        },
-        unfollow: (id: number) => {
-            dispatch(unfollowAC(id))
-        },
-        setUsers: (users: UserType[]) => {
-            dispatch(setUsersAC(users))
-        },
-        setCurrentPage: (pageNumber: number) => {
-            dispatch(setCurrentPageAC(pageNumber))
-        },
-        setTotalUsersCount: (totalCount: number) => {
-            dispatch(setTotalUsersCountAC(totalCount))
-        },
-        setIsFetching: (isFetching: boolean) => {
-            dispatch(setIsFetchingAC(isFetching))
-        }
 
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer)
+export default connect(mapStateToProps, {
+    follow,
+    unfollow,
+    setUsers,
+    setCurrentPage,
+    setTotalUsersCount,
+    setIsFetching
+})(UsersContainer)
 
