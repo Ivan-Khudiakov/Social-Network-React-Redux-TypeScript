@@ -1,10 +1,20 @@
 import React from "react";
+import {ProfileType} from "../../../redux/profileReducer";
+import style from "./ProfileInfo.module.css";
+import {Preloader} from "../../../common/Preloader/Preloader";
 
-const ProfileInfo = () => {
+type PropsType = {
+    profile: null | ProfileType
+}
+
+const ProfileInfo = (props: PropsType) => {
+    if (!props.profile) {
+        return <Preloader/>
+    }
     return (
-        <div>
-            avatar + description
-        </div>
+        <>
+            <img className={style.avatar} src={props.profile?.photos.large} alt={"Avatar"}/>
+        </>
     )
 }
 export default ProfileInfo

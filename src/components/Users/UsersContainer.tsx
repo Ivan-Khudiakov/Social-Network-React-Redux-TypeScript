@@ -8,11 +8,11 @@ import {
     unfollow,
     UserType
 } from "../../redux/usersReducer";
-import preloader from "../../assets/images/preloader.gif"
 import {AppRootStateType} from "../../redux/redux-store";
 import React from "react";
 import axios from "axios";
 import {Users} from "./Users";
+import {Preloader} from "../../common/Preloader/Preloader";
 
 export class UsersContainer extends React.Component<UserPagePropsType> {
     componentDidMount() {
@@ -36,15 +36,15 @@ export class UsersContainer extends React.Component<UserPagePropsType> {
     render() {
         return (
             <>
-                {this.props.isFetching ? <img src={preloader} alt={"Loading..."}/> : null}
+                {this.props.isFetching ? <Preloader/> : null}
                 <Users totalUsersCount={this.props.totalUsersCount}
-                        pageSize={this.props.pageSize}
-                        currentPage={this.props.currentPage}
-                        onPageChanged={this.onPageChanged}
-                        follow={this.props.follow}
-                        unfollow={this.props.unfollow}
-                        users={this.props.users}/>
-        </>
+                       pageSize={this.props.pageSize}
+                       currentPage={this.props.currentPage}
+                       onPageChanged={this.onPageChanged}
+                       follow={this.props.follow}
+                       unfollow={this.props.unfollow}
+                       users={this.props.users}/>
+            </>
         )
     }
 }
