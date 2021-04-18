@@ -1,5 +1,5 @@
 import React from "react";
-import {ProfileType} from "../../../redux/profileReducer";
+import {ProfileType} from "../../../redux/profile-reducer";
 import style from "./ProfileInfo.module.css";
 import {Preloader} from "../../../common/Preloader/Preloader";
 

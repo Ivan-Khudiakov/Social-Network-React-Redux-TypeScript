@@ -1,5 +1,5 @@
 import {RootStateType} from "../../../redux/store";
-import {AddPostAC, UpdateNewPostTextAC} from "../../../redux/profileReducer";
+import {AddPostAC, UpdateNewPostTextAC} from "../../../redux/profile-reducer";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";

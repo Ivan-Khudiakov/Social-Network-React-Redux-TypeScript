@@ -1,14 +1,3 @@
-import {AddPostAC, setUserProfile, UpdateNewPostTextAC} from "./profileReducer";
-import {AddMessageAC, UpdateNewMessageAC} from "./dialogsReducer";
-import {
-    follow,
-    setCurrentPage,
-    setIsFetching,
-    setTotalUsersCount,
-    setUsers,
-    unfollow,
-} from "./usersReducer";
-
 export type PostType = {
     id: number
     message: string
@@ -60,18 +49,8 @@ export type RootStateType = {
 //     dispatch: (action: ActionsType) => void
 // }
 
-export type ActionsType =
-    ReturnType<typeof AddPostAC> |
-    ReturnType<typeof UpdateNewPostTextAC> |
-    ReturnType<typeof AddMessageAC> |
-    ReturnType<typeof UpdateNewMessageAC> |
-    ReturnType<typeof follow> |
-    ReturnType<typeof unfollow> |
-    ReturnType<typeof setUsers> |
-    ReturnType<typeof setCurrentPage> |
-    ReturnType<typeof setTotalUsersCount> |
-    ReturnType<typeof setIsFetching> |
-    ReturnType<typeof setUserProfile>
+
+
 
 
 

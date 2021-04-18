@@ -7,3 +7,13 @@
 .header img {
     height: 50px;
 }
+
+.loginBlock {
+    float: right;
+    margin: 10px 20px;
+
+}
+.loginBlock a {
+    color: azure;
+    text-decoration: none;
+}

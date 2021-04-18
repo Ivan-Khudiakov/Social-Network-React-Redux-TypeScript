@@ -7,7 +7,7 @@ import {
     setUsers,
     unfollow,
     UserType
-} from "../../redux/usersReducer";
+} from "../../redux/users-reducer";
 import {AppRootStateType} from "../../redux/redux-store";
 import React from "react";
 import axios from "axios";
@@ -49,7 +49,7 @@ export class UsersContainer extends React.Component<UserPagePropsType> {
     }
 }
 
-export type MapStateToPropsType = {
+type MapStateToPropsType = {
     users: Array<UserType>
     pageSize: number
     totalUsersCount: number
@@ -57,7 +57,7 @@ export type MapStateToPropsType = {
     isFetching: boolean
 
 }
-export type MapDispatchToPropsType = {
+type MapDispatchToPropsType = {
     follow: (id: number) => void
     unfollow: (id: number) => void
     setUsers: (users: Array<UserType>) => void
@@ -65,7 +65,7 @@ export type MapDispatchToPropsType = {
     setTotalUsersCount: (totalCount: number) => void
     setIsFetching: (isFetching: boolean) => void
 }
-export type UserPagePropsType = MapStateToPropsType & MapDispatchToPropsType
+type UserPagePropsType = MapStateToPropsType & MapDispatchToPropsType
 
 const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
     return {

@@ -1,7 +1,13 @@
-import {ActionsType, DialogMessagesType, DialogPageType} from "./store";
+import {DialogMessagesType, DialogPageType} from "./store";
+
 
 export const ADD_MESSAGE = "ADD-MESSAGE"
 export const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT"
+
+type ActionsType =
+    ReturnType<typeof AddMessageAC> |
+    ReturnType<typeof UpdateNewMessageAC>
+
 
 export const initialState = {
     textForNewMessage: '',
