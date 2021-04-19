@@ -4,6 +4,7 @@ const SET_USERS = "SET_USERS"
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
 const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT"
 const SET_IS_FETCHING = "SET_IS_FETCHING"
+const TOGGLE_IS_FOLLOWING_PROGRESS = "TOGGLE_IS_FOLLOWING_PROGRESS"
 
 type ActionsType =
     ReturnType<typeof follow> |
@@ -11,9 +12,8 @@ type ActionsType =
     ReturnType<typeof setUsers> |
     ReturnType<typeof setCurrentPage> |
     ReturnType<typeof setTotalUsersCount> |
-    ReturnType<typeof setIsFetching>
-
-
+    ReturnType<typeof setIsFetching> |
+    ReturnType<typeof toggleIsFollowingProgress>
 
 export type UserType = {
     id: number
@@ -28,7 +28,8 @@ const initialState = {
     pageSize: 50,
     totalUsersCount:0,
     currentPage: 1,
-    isFetching: false
+    isFetching: false,
+    followingInProgress: [] as Array<number>
 }
 
 type InitialStateType = typeof initialState
@@ -61,6 +62,13 @@ export const usersReducer = (state: InitialStateType = initialState, action: Act
             return {...state, totalUsersCount: action.totalCount}
         case SET_IS_FETCHING:
             return {...state, isFetching: action.isFetching}
+        case TOGGLE_IS_FOLLOWING_PROGRESS:
+            return {
+                ...state,
+                followingInProgress: action.isFollowingInProgress
+                    ? [...state.followingInProgress, action.id]
+                    : state.followingInProgress.filter(id => id !== action.id)
+            }
         default:
             return state
     }
@@ -72,3 +80,4 @@ export const setUsers = (users: UserType[]) =>  ({type: SET_USERS, users} as con
 export const setCurrentPage = (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage} as const)
 export const setTotalUsersCount = (totalUsersCount: number) => ({type: SET_TOTAL_USERS_COUNT, totalCount: totalUsersCount} as const)
 export const setIsFetching = (isFetching: boolean) => ({type: SET_IS_FETCHING, isFetching} as const)
+export const toggleIsFollowingProgress = (isFollowingInProgress: boolean, id: number) => ({type:TOGGLE_IS_FOLLOWING_PROGRESS, isFollowingInProgress, id} as const)
