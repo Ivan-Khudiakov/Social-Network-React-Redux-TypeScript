@@ -1,6 +1,8 @@
 .users {
     background: gold;
     padding: 10px;
+    cursor: pointer
+
 }
 .selectedPage {
     font-weight: bold;

@@ -8,7 +8,6 @@ import {AppRootStateType} from "../../redux/redux-store";
 
 
 type MapStatePropsType = {
-
     login: string
     isAuth: boolean
 }
