@@ -82,10 +82,8 @@ export const AddPostAC = () => {return {type: ADD_POST} as const}
 export const UpdateNewPostTextAC = (textForNewPost: string) => {return{type: UPDATE_NEW_POST_TEXT, textForNewPost: textForNewPost} as const}
 export const setUserProfile = (profile: null | ProfileType) => {return {type: SET_USER_PROFILE, profile} as const}
 
-export const getProfile = (userId: string) => {
-    return (dispatch: Dispatch) => {
-        profileAPI.getProfile(userId).then(response => {
-            dispatch(setUserProfile(response.data))
-        })
-    }
+export const getProfile = (userId: string) => (dispatch: Dispatch) => {
+    profileAPI.getProfile(userId).then(response => {
+        dispatch(setUserProfile(response.data))
+    })
 }
