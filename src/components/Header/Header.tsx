@@ -8,7 +8,6 @@ type HeaderPropsType = {
 }
 
 export const Header = (props: HeaderPropsType) => {
-    debugger
     return (
         <div className={s.header}>
             <img

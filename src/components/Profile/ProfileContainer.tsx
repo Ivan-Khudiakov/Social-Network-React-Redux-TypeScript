@@ -21,8 +21,6 @@ type CommonPropsType = RouteComponentProps<PathParamsType> & ProfilePagePropsTyp
 class ProfileContainer extends React.Component<CommonPropsType> {
 
     componentDidMount() {
-        debugger
-
         let userId = this.props.match.params.userId
         if (!userId) {
             userId = "2"
@@ -39,7 +37,6 @@ class ProfileContainer extends React.Component<CommonPropsType> {
         )
     }
 }
-
 
 let mapStateToProps = (state: AppRootStateType): MapStateToPropsType => ({
     profile: state.profilePage.profile

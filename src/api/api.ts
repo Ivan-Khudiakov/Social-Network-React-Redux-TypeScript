@@ -12,6 +12,21 @@ export const usersAPI = {
             .then(response => {
                 return response.data
             })
+    },
+    follow(userId: number) {
+        return instance.post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`)
+    },
+    unfollow(userId: number) {
+        return instance.delete(`follow/${userId}`)
     }
 }
 
+// export const profileAPI ={
+//     getProfile(userId: number) {
+//         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
+//             .then(response => {
+//                 this.props.setUserProfile(response.data)
+//             })
+//     }
+
+// }
