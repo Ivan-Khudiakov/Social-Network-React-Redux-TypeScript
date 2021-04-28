@@ -1,17 +1,5 @@
-export type PostType = {
-    id: number
-    message: string
-    likes: number
-}
-export type DialogItemsType = {
-    id: number
-    path: string
-    name: string
-}
-export type DialogMessagesType = {
-    id: number
-    text: string
-}
+import {DialogPageType} from "../components/Dialogs/DiaogsContainer";
+
 type LocationUsersType = {
     city: string
     country: string
@@ -24,23 +12,15 @@ type UserType = {
     status: string
     location: LocationUsersType
 }
-export type ProfilePageType = {
-    textForNewPost: string
-    posts: Array<PostType>
-}
-export type DialogPageType = {
-    textForNewMessage: string
-    arrDialogsItems: Array<DialogItemsType>
-    arrDialogsMessages: Array<DialogMessagesType>
-}
+
 type UsersPageType = {
     users: Array<UserType>
 }
-export type RootStateType = {
-    profilePage: ProfilePageType
-    dialogsPage: DialogPageType
-    userPage: UsersPageType
-}
+// export type RootStateType = {
+//     profilePage: ProfilePageType
+//     dialogsPage: DialogPageType
+//     userPage: UsersPageType
+// }
 // export type StoreType = {
 //     _state: RootStateType
 //     getState: () => RootStateType

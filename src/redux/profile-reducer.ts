@@ -1,15 +1,14 @@
 import { Dispatch } from "redux";
-import {PostType} from "./store";
 import {profileAPI} from "../api/api";
+import {PostType} from "../components/Profile/MyPosts/MyPostContainer";
 
 const ADD_POST = "ADD-POST"
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
 const SET_USER_PROFILE = "SET_USER_PROFILE"
 type ActionsType =
-    ReturnType<typeof AddPostAC> |
-    ReturnType<typeof UpdateNewPostTextAC> |
+    ReturnType<typeof addPost> |
+    ReturnType<typeof updateNewPostText> |
     ReturnType<typeof setUserProfile>
-
 
 type ContactsType = {
     facebook: string | null,
@@ -34,12 +33,6 @@ export type ProfileType = {
     userId: number,
     photos: PhotosType
 }
-
-// export type ProfilePageType = {
-//     textForNewPost: string
-//     posts: Array<PostType>
-//     profile: ProfileType
-// }
 
 const initialState = {
     textForNewPost: '',
@@ -78,8 +71,8 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
     }
 }
 
-export const AddPostAC = () => {return {type: ADD_POST} as const}
-export const UpdateNewPostTextAC = (textForNewPost: string) => {return{type: UPDATE_NEW_POST_TEXT, textForNewPost: textForNewPost} as const}
+export const addPost = () => {return {type: ADD_POST} as const}
+export const updateNewPostText = (textForNewPost: string) => {return{type: UPDATE_NEW_POST_TEXT, textForNewPost: textForNewPost} as const}
 export const setUserProfile = (profile: null | ProfileType) => {return {type: SET_USER_PROFILE, profile} as const}
 
 export const getProfile = (userId: string) => (dispatch: Dispatch) => {

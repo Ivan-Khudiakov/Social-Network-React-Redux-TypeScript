@@ -2,12 +2,14 @@ import React, {ChangeEvent} from "react";
 import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import DialogMessage from "./DialogMessage/DialogMessage";
-import {DialogPageType,} from "../../redux/store";
+import {DialogPageType} from "./DiaogsContainer";
+import { Redirect } from "react-router-dom";
 
 type DialogsPropsType = {
     dialogsPage: DialogPageType
+    isAuth: boolean
     addMessage: () => void
-    changeMessage: (message: string) => void
+    updateNewMessage: (message: string) => void
 }
 
 const Dialogs = (props: DialogsPropsType) => {
@@ -16,8 +18,10 @@ const Dialogs = (props: DialogsPropsType) => {
     }
     const changeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let message = e.currentTarget.value
-        props.changeMessage(message)
+        props.updateNewMessage(message)
     }
+
+    if (!props.isAuth) return <Redirect to={"/login"}/>
 
     return (
         <div className={s.dialogs}>
@@ -27,9 +31,10 @@ const Dialogs = (props: DialogsPropsType) => {
             <div className={s.dialogsMessages}>
                 <DialogMessage dialogsMessages={props.dialogsPage.arrDialogsMessages}/>
                 <div>
-                        <textarea placeholder={"Enter you message"}
-                                  value={props.dialogsPage.textForNewMessage}
-                                  onChange={changeMessage}></textarea>
+                        <textarea
+                            placeholder={"Enter you message"}
+                            value={props.dialogsPage.textForNewMessage}
+                            onChange={changeMessage}></textarea>
                 </div>
                 <div>
                     <button onClick={addMessage}>Send</button>

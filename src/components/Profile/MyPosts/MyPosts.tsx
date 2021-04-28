@@ -1,14 +1,15 @@
 import React, {ChangeEvent} from "react";
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {PostType} from "../../../redux/store";
-
+import {PostType} from "./MyPostContainer";
+import {Redirect} from "react-router-dom";
 
 type MyPostPropsType = {
     posts: Array<PostType>
-    changeText: (text: string) => void
-    addPost: () => void
     textForNewPost: string
+    updateNewPostText: (textForNewPost: string) => void
+    addPost: () => void
+    isAuth: boolean
 }
 
 
@@ -18,8 +19,10 @@ const MyPosts = (props: MyPostPropsType) => {
     }
     const changeText = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let text = e.currentTarget.value
-        props.changeText(text)
+        props.updateNewPostText(text)
     }
+
+    if (!props.isAuth) return <Redirect to={"/login"}/>
     return (
         <div className={s.item}>
             <div>

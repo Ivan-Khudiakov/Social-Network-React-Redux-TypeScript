@@ -1,13 +1,11 @@
-import {DialogMessagesType, DialogPageType} from "./store";
-
+import {DialogMessagesType, DialogPageType} from "../components/Dialogs/DiaogsContainer";
 
 export const ADD_MESSAGE = "ADD-MESSAGE"
 export const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT"
 
 type ActionsType =
-    ReturnType<typeof AddMessageAC> |
-    ReturnType<typeof UpdateNewMessageAC>
-
+    ReturnType<typeof addMessage> |
+    ReturnType<typeof updateNewMessage>
 
 export const initialState = {
     textForNewMessage: '',
@@ -52,12 +50,12 @@ export const dialogsReducer = (state: DialogPageType = initialState, action: Act
     }
 }
 
-export const AddMessageAC = () => {
+export const addMessage = () => {
     return {
         type: ADD_MESSAGE
     } as const
 }
-export const UpdateNewMessageAC = (textForNewMessage: string) => {
+export const updateNewMessage = (textForNewMessage: string) => {
     return {
         type: UPDATE_NEW_MESSAGE_TEXT,
         textForNewMessage: textForNewMessage
