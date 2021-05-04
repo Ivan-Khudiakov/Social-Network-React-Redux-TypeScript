@@ -1,4 +1,4 @@
-import {DialogMessagesType, DialogPageType} from "../components/Dialogs/DiaogsContainer";
+import {DialogMessagesType, DialogPageType} from "../components/Dialogs/DialogsContainer";
 
 export const ADD_MESSAGE = "ADD-MESSAGE"
 export const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT"

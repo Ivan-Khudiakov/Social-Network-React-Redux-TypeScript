@@ -1,6 +1,6 @@
 import React from "react";
 import s from '../Dialogs.module.css'
-import {DialogMessagesType} from "../DiaogsContainer";
+import {DialogMessagesType} from "../DialogsContainer";
 
 
 type DialogMessageType = {

@@ -2,8 +2,9 @@ import {addMessage, updateNewMessage} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux/redux-store";
-import React from "react";
+import {ComponentType} from "react";
 import {withAuthRedirect} from "../../hoc/WithAuthRedirect";
+import { compose } from "redux";
 
 export type DialogItemsType = {
     id: number
@@ -19,19 +20,16 @@ export type DialogPageType = {
     arrDialogsItems: Array<DialogItemsType>
     arrDialogsMessages: Array<DialogMessagesType>
 }
-
 export type MapStatePropsType = {
     dialogsPage: DialogPageType
-    isAuth: boolean
-}
-let AuthRedirectComponent = withAuthRedirect(Dialogs)
-let mapStateToProps = (state: AppRootStateType): MapStatePropsType => {
-    return {
-        dialogsPage: state.dialogsPage,
-        isAuth: state.auth.isAuth
-    }
+
 }
 
+let mapStateToProps = (state: AppRootStateType): MapStatePropsType => ({
+    dialogsPage: state.dialogsPage
+})
 
-const DialogsContainer = connect(mapStateToProps, {addMessage, updateNewMessage}) (AuthRedirectComponent)
-export default DialogsContainer;
+export default compose<ComponentType>(
+    connect(mapStateToProps, {addMessage, updateNewMessage}),
+    withAuthRedirect
+)(Dialogs)
