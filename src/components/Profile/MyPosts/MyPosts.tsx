@@ -26,6 +26,7 @@ const MyPosts = (props: MyPostPropsType) => {
     return (
         <div className={s.item}>
             <div>
+                <h2>My posts</h2>
                 <textarea value={props.textForNewPost} onChange={changeText}></textarea>
                 <button onClick={addPost}>Add post</button>
             </div>
