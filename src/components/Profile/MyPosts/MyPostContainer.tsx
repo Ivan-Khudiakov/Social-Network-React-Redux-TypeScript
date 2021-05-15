@@ -1,4 +1,4 @@
-import {addPost, updateNewPostText} from "../../../redux/profile-reducer";
+import {addPost} from "../../../redux/profile-reducer";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../../redux/redux-store";
@@ -10,7 +10,6 @@ export type PostType = {
     likes: number
 }
 export type mapStateToPropsType = {
-    textForNewPost: string
     posts: Array<PostType>
     isAuth: boolean
 }
@@ -18,10 +17,9 @@ export type mapStateToPropsType = {
 const mapStateToProps = (state: AppRootStateType): mapStateToPropsType => {
     return {
         posts: state.profilePage.posts,
-        textForNewPost: state.profilePage.textForNewPost,
         isAuth: state.auth.isAuth
     }
 }
 
-const MyPostsContainer = connect(mapStateToProps, {addPost, updateNewPostText })(MyPosts)
+const MyPostsContainer = connect(mapStateToProps, {addPost})(MyPosts)
 export default MyPostsContainer;

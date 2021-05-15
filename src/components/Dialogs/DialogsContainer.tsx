@@ -1,4 +1,4 @@
-import {addMessage, updateNewMessage} from "../../redux/dialogs-reducer";
+import {addMessage} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux/redux-store";
@@ -16,7 +16,6 @@ export type DialogMessagesType = {
     text: string
 }
 export type DialogPageType = {
-    textForNewMessage: string
     arrDialogsItems: Array<DialogItemsType>
     arrDialogsMessages: Array<DialogMessagesType>
 }
@@ -30,6 +29,6 @@ let mapStateToProps = (state: AppRootStateType): MapStatePropsType => ({
 })
 
 export default compose<ComponentType>(
-    connect(mapStateToProps, {addMessage, updateNewMessage}),
+    connect(mapStateToProps, {addMessage}),
     withAuthRedirect
 )(Dialogs)

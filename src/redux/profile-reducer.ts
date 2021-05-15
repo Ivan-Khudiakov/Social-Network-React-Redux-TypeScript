@@ -3,13 +3,11 @@ import {profileAPI} from "../api/api";
 import {PostType} from "../components/Profile/MyPosts/MyPostContainer";
 
 const ADD_POST = "ADD-POST"
-const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
 const SET_USER_PROFILE = "SET_USER_PROFILE"
 const SET_USER_STATUS = "SET_USER_STATUS"
 
 type ActionsType =
     ReturnType<typeof addPost> |
-    ReturnType<typeof updateNewPostText> |
     ReturnType<typeof setUserProfile> |
     ReturnType<typeof setUserStatus>
 
@@ -38,7 +36,6 @@ export type ProfileType = {
 }
 
 const initialState = {
-    textForNewPost: '',
     posts: [
         {id: 1, message: "Hi!", likes: 15},
         {id: 2, message: "Hello World!", likes: 28},
@@ -56,17 +53,14 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
         case ADD_POST: {
             let newPost: PostType = {
                 id: new Date().getTime(),
-                message: state.textForNewPost,
+                message: action.textForNewPost,
                 likes: 0
             }
             return {
                 ...state,
                 posts: [...state.posts, newPost],
-                textForNewPost: ""
+
             }
-        }
-        case UPDATE_NEW_POST_TEXT: {
-            return {...state, textForNewPost: action.textForNewPost}
         }
         case SET_USER_STATUS: {
             return {...state, status: action.status}
@@ -79,8 +73,7 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
     }
 }
 
-export const addPost = () => {return {type: ADD_POST} as const}
-export const updateNewPostText = (textForNewPost: string) => {return{type: UPDATE_NEW_POST_TEXT, textForNewPost: textForNewPost} as const}
+export const addPost = (textForNewPost: string) => {return {type: ADD_POST, textForNewPost} as const}
 export const setUserStatus = (status: string) => {return {type: SET_USER_STATUS, status} as const}
 export const setUserProfile = (profile: null | ProfileType) => {return {type: SET_USER_PROFILE, profile} as const}
 

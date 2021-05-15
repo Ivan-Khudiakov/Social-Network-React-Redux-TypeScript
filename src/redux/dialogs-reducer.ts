@@ -1,14 +1,12 @@
 import {DialogMessagesType, DialogPageType} from "../components/Dialogs/DialogsContainer";
 
 export const ADD_MESSAGE = "ADD-MESSAGE"
-export const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT"
 
 type ActionsType =
-    ReturnType<typeof addMessage> |
-    ReturnType<typeof updateNewMessage>
+    ReturnType<typeof addMessage>
+
 
 export const initialState = {
-    textForNewMessage: '',
     arrDialogsItems: [
         {id: 1, path: '/dialogs/1', name: 'Katya'},
         {id: 2, path: '/dialogs/2', name: 'Tim'},
@@ -31,18 +29,11 @@ export const dialogsReducer = (state: DialogPageType = initialState, action: Act
         case ADD_MESSAGE: {
             let newMessage: DialogMessagesType = {
                 id: new Date().getTime(),
-                text: state.textForNewMessage
+                text: action.textForNewMessage
             }
             return {
                 ...state,
-                arrDialogsMessages: [...state.arrDialogsMessages, newMessage],
-                textForNewMessage: ""
-            }
-        }
-        case UPDATE_NEW_MESSAGE_TEXT: {
-            return {
-                ...state,
-                textForNewMessage: action.textForNewMessage
+                arrDialogsMessages: [...state.arrDialogsMessages, newMessage]
             }
         }
         default:
@@ -50,14 +41,5 @@ export const dialogsReducer = (state: DialogPageType = initialState, action: Act
     }
 }
 
-export const addMessage = () => {
-    return {
-        type: ADD_MESSAGE
-    } as const
-}
-export const updateNewMessage = (textForNewMessage: string) => {
-    return {
-        type: UPDATE_NEW_MESSAGE_TEXT,
-        textForNewMessage: textForNewMessage
-    } as const
+export const addMessage = (textForNewMessage: string) => {return {type: ADD_MESSAGE, textForNewMessage} as const
 }
