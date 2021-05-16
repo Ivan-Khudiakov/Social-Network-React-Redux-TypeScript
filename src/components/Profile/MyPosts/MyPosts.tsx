@@ -4,6 +4,8 @@ import Post from "./Post/Post";
 import {PostType} from "./MyPostContainer";
 import {Redirect} from "react-router-dom";
 import {Field, reduxForm} from "redux-form";
+import {maxLengthCreator, required} from "../../../utils/validators/validators";
+import {TextArea} from "../../../common/FormsControls/FormsControls";
 
 type MyPostPropsType = {
     posts: Array<PostType>
@@ -11,15 +13,20 @@ type MyPostPropsType = {
     isAuth: boolean
 }
 
+const maxLength = maxLengthCreator(10)
+
 const AddPostForm = (props: any) => {
     return (
         <form onSubmit={props.handleSubmit}>
-            <Field component={'textarea'} name={'textForNewPost'} placeholder={'new Post'}/>
+            <Field component={TextArea}
+                   name={'textForNewPost'}
+                   placeholder={'new Post'}
+                   validate={[required, maxLength]}/>
             <button>Add post</button>
         </form>
     )
 }
-const AddPostFormRedux = reduxForm({form: 'dialogAddMessageForm'})(AddPostForm)
+const AddPostFormRedux = reduxForm({form: 'addPostForm'})(AddPostForm)
 
 const MyPosts = (props: MyPostPropsType) => {
     const addNewPost = (values: any) => {
