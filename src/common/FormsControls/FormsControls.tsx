@@ -45,3 +45,15 @@ export const TextArea = (props:TextAreaPropsType) => {
         </div>
     )
 }
+
+export const Input = (props:TextAreaPropsType) => {
+    const hasError = props.meta.touched && props.meta.error
+    return (
+        <div className={styles.formControl + ' ' + (hasError? styles.error: '')}>
+            {hasError && <span>{props.meta.error}</span>}
+            <div>
+                <input {...props.input} {...props}/>
+            </div>
+        </div>
+    )
+}
