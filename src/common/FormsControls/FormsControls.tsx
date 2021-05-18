@@ -3,8 +3,8 @@ import styles from "./FormsControls.module.css"
 
 type InputType = {
     name: string
-    onBlur: (event: any) => void
-    onChange: (event: any) => void
+    onBlur?: (event: any) => void
+    onChange?: (event: any) => void
     onDragStart: (event: any) => void
     onDrop: (event: any) => void
     onFocus: (event: any) => void

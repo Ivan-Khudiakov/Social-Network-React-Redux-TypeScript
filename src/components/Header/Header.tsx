@@ -4,7 +4,8 @@ import s from './Header.module.css'
 
 type HeaderPropsType = {
     isAuth: boolean
-    login: string
+    login: string | null
+    logout: () => void
 }
 
 export const Header = (props: HeaderPropsType) => {
@@ -14,7 +15,8 @@ export const Header = (props: HeaderPropsType) => {
                 src='https://freevector-images.s3.amazonaws.com/uploads/vector/preview/39183/FreeVectorOfTheDay141GlobeLogoConcept.jpg'
                 alt='logo'/>
             <div className={s.loginBlock}>
-                {props.isAuth ? props.login : <NavLink to={'/login'}>login</NavLink>}
+                {props.isAuth
+                    ? <div>{props.login} - <button onClick={props.logout}>Log Out</button></div> : <NavLink to={'/login'}>login</NavLink>}
             </div>
 
         </div>
