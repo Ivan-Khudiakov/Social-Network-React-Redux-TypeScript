@@ -44,8 +44,8 @@ const initialState = {
     ] as Array<PostType>,
     profile: null as null | ProfileType,
     status: ''
-
 }
+
 type InitialStateType = typeof initialState
 
 export const profileReducer = (state: InitialStateType = initialState, action: ActionsType):InitialStateType => {
@@ -59,7 +59,6 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
             return {
                 ...state,
                 posts: [...state.posts, newPost],
-
             }
         }
         case SET_USER_STATUS: {
@@ -94,6 +93,5 @@ export const updateStatus = (status: string) => (dispatch: Dispatch) => {
         if (response.data.resultCode === 0) {
             dispatch(setUserStatus(status))
         }
-
     })
 }
