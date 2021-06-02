@@ -5,11 +5,13 @@ import {PostType} from "../components/Profile/MyPosts/MyPostContainer";
 const ADD_POST = "ADD-POST"
 const SET_USER_PROFILE = "SET_USER_PROFILE"
 const SET_USER_STATUS = "SET_USER_STATUS"
+const DELETE_POST = "DELETE_POST"
 
 type ActionsType =
     ReturnType<typeof addPost> |
     ReturnType<typeof setUserProfile> |
-    ReturnType<typeof setUserStatus>
+    ReturnType<typeof setUserStatus> |
+    ReturnType<typeof deletePost>
 
 type ContactsType = {
     facebook: string | null,
@@ -61,6 +63,9 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
                 posts: [...state.posts, newPost],
             }
         }
+        case DELETE_POST: {
+            return {...state, posts: state.posts.filter(p => p.id !== action.id)}
+        }
         case SET_USER_STATUS: {
             return {...state, status: action.status}
         }
@@ -73,8 +78,10 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
 }
 
 export const addPost = (textForNewPost: string) => {return {type: ADD_POST, textForNewPost} as const}
+export const deletePost = (id: number) => {return {type: DELETE_POST, id} as const}
 export const setUserStatus = (status: string) => {return {type: SET_USER_STATUS, status} as const}
 export const setUserProfile = (profile: null | ProfileType) => {return {type: SET_USER_PROFILE, profile} as const}
+
 
 export const getProfile = (userId: string) => (dispatch: Dispatch) => {
     profileAPI.getProfile(userId).then(response => {

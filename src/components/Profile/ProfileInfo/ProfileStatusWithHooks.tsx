@@ -18,7 +18,7 @@ export const ProfileStatusWithHooks = (props: PropsType) => {
     }
     const deactivateEditMode = () => {
         setEditMode(false)
-        //данный запрос необходи для сохранения нового статуса после деактивации
+        //данный запрос необходим для сохранения нового статуса после деактивации
         props.updateStatus(status)
     }
     const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
