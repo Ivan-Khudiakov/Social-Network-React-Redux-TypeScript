@@ -18,8 +18,8 @@ it('new post should be added', () => {
     // 2. Action
     let newState = profileReducer(state, action)
     // 3. проверка результата
-    expect(newState.posts.length) .toBe(5)
-    expect(newState.posts[4].message) .toBe('Hi')
+    expect(newState.posts.length).toBe(5)
+    expect(newState.posts[4].message).toBe('Hi')
 })
 
 it('after deleting length of message should be decrement', () => {
@@ -28,7 +28,7 @@ it('after deleting length of message should be decrement', () => {
     // 2. Action
     let newState = profileReducer(state, action)
     // 3. проверка результата
-    expect(newState.posts.length) .toBe(3)
+    expect(newState.posts.length).toBe(3)
 })
 
 it('status should be update', () => {
@@ -37,7 +37,7 @@ it('status should be update', () => {
     // 2. Action
     let newState = profileReducer(state, action)
     // 3. проверка результата
-    expect(newState.status) .toBe('Hi')
+    expect(newState.status).toBe('Hi')
 })
 
 it('must not be received', () => {
@@ -46,6 +46,6 @@ it('must not be received', () => {
     // 2. Action
     let newState = profileReducer(state, action)
     // 3. проверка результата
-    expect(newState.profile) .toBe(null)
+    expect(newState.profile).toBe(null)
 })
 
