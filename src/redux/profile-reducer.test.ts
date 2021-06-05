@@ -12,6 +12,16 @@ const state = {
     status: ''
 }
 
+it('new post should be added', () => {
+    // 1. тестовые данные
+    let action = addPost('Hi')
+    // 2. Action
+    let newState = profileReducer(state, action)
+    // 3. проверка результата
+    expect(newState.posts.length) .toBe(5)
+    expect(newState.posts[4].message) .toBe('Hi')
+})
+
 it('after deleting length of message should be decrement', () => {
     // 1. тестовые данные
     let action = deletePost(1)
@@ -39,12 +49,3 @@ it('must not be received', () => {
     expect(newState.profile) .toBe(null)
 })
 
-it('new post should be added', () => {
-    // 1. тестовые данные
-    let action = addPost('Hi')
-    // 2. Action
-    let newState = profileReducer(state, action)
-    // 3. проверка результата
-    expect(newState.posts.length) .toBe(5)
-    expect(newState.posts[4].message) .toBe('Hi')
-})
