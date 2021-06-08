@@ -2,10 +2,10 @@ import { Dispatch } from "redux";
 import {profileAPI} from "../api/api";
 import {PostType} from "../components/Profile/MyPosts/MyPostContainer";
 
-const ADD_POST = "ADD-POST"
-const SET_USER_PROFILE = "SET_USER_PROFILE"
-const SET_USER_STATUS = "SET_USER_STATUS"
-const DELETE_POST = "DELETE_POST"
+const ADD_POST = "profile/ADD-POST"
+const SET_USER_PROFILE = "profile/SET_USER_PROFILE"
+const SET_USER_STATUS = "profile/SET_USER_STATUS"
+const DELETE_POST = "profile/DELETE_POST"
 
 type ActionsType =
     ReturnType<typeof addPost> |

@@ -1,6 +1,6 @@
 import {DialogMessagesType, DialogPageType} from "../components/Dialogs/DialogsContainer";
 
-export const ADD_MESSAGE = "ADD-MESSAGE"
+export const ADD_MESSAGE = "dialogs/ADD-MESSAGE"
 
 type ActionsType =
     ReturnType<typeof addMessage>

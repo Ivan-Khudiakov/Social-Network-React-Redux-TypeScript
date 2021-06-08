@@ -1,13 +1,13 @@
 import {usersAPI} from "../api/api";
 import {Dispatch} from "redux";
 
-const FOLLOW = "FOLLOW"
-const UNFOLLOW = "UNFOLLOW"
-const SET_USERS = "SET_USERS"
-const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
-const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT"
-const SET_IS_FETCHING = "SET_IS_FETCHING"
-const TOGGLE_IS_FOLLOWING_PROGRESS = "TOGGLE_IS_FOLLOWING_PROGRESS"
+const FOLLOW = "users/FOLLOW"
+const UNFOLLOW = "users/UNFOLLOW"
+const SET_USERS = "users/SET_USERS"
+const SET_CURRENT_PAGE = "users/SET_CURRENT_PAGE"
+const SET_TOTAL_USERS_COUNT = "users/SET_TOTAL_USERS_COUNT"
+const SET_IS_FETCHING = "users/SET_IS_FETCHING"
+const TOGGLE_IS_FOLLOWING_PROGRESS = "users/TOGGLE_IS_FOLLOWING_PROGRESS"
 
 type ActionsType =
     ReturnType<typeof followSuccess> |
