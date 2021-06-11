@@ -14,20 +14,17 @@ type UsersPropsType = {
     currentPage: number
     users: Array<UserType>
     followingProgress: Array<number>
+    portionSize: number
 }
 export const Users = (props: UsersPropsType) => {
-    let pagesCount = Math.ceil (props.totalUsersCount / props.pageSize)
-    let pages = []
-    for (let i=1; i <= pagesCount; i++) {
-        pages.push(i)
-    }
     return (
         <div className={style.users}>
             <Paginator
                 currentPage={props.currentPage}
                 onPageChanged={props.onPageChanged}
                 pageSize={props.pageSize}
-                totalUsersCount={props.totalUsersCount}/>
+                totalItemsCount={props.totalUsersCount}
+                portionSize={props.portionSize}/>
             {
                 props.users.map(u =>
                     <div key={u.id}>

@@ -8,7 +8,8 @@ const state = {
     totalUsersCount:0,
     currentPage: 1,
     isFetching: false,
-    followingInProgress: [] as Array<number>
+    followingInProgress: [] as Array<number>,
+    portionSize: 10
 }
 
 it('current page should be update', () => {
