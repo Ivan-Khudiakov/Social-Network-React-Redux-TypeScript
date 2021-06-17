@@ -60,17 +60,6 @@ type MapDispatchToPropsType = {
 }
 type UserPagePropsType = MapStateToPropsType & MapDispatchToPropsType
 
-// const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
-//     return {
-//         users: state.usersPage.users,
-//         pageSize: state.usersPage.pageSize,
-//         totalUsersCount: state.usersPage.totalUsersCount,
-//         currentPage: state.usersPage.currentPage,
-//         isFetching: state.usersPage.isFetching,
-//         followingProgress: state.usersPage.followingInProgress
-//     }
-// }
-
 const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
     return {
         users: getUsersSuperSelector(state),
