@@ -5,7 +5,7 @@ import {PostType} from "./MyPostContainer";
 import {Redirect} from "react-router-dom";
 import {Field, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../../utils/validators/validators";
-import {TextArea} from "../../../common/FormsControls/FormsControls";
+import {Textarea} from "../../../common/FormsControls/FormsControls";
 
 type MyPostPropsType = {
     posts: Array<PostType>
@@ -18,7 +18,7 @@ const maxLength = maxLengthCreator(10)
 const AddPostForm = (props: any) => {
     return (
         <form onSubmit={props.handleSubmit}>
-            <Field component={TextArea}
+            <Field component={Textarea}
                    name={'textForNewPost'}
                    placeholder={'new Post'}
                    validate={[required, maxLength]}/>

@@ -1,6 +1,9 @@
-import { Dispatch } from "redux";
+import {Action, Dispatch } from "redux";
 import {profileAPI} from "../api/api";
 import {PostType} from "../components/Profile/MyPosts/MyPostContainer";
+import {FormAction, stopSubmit} from "redux-form";
+import { ThunkAction } from "redux-thunk";
+import {AppRootStateType} from "./redux-store";
 
 const ADD_POST = "profile/ADD-POST"
 const SET_USER_PROFILE = "profile/SET_USER_PROFILE"
@@ -14,8 +17,10 @@ type ActionsType =
     ReturnType<typeof setUserStatus> |
     ReturnType<typeof deletePost> |
     ReturnType<typeof savePhotoSuccess>
+type BaseThunkType<A extends Action = Action, R = Promise<void>> = ThunkAction<R, AppRootStateType, unknown, A>
+type ThunkType = BaseThunkType<ActionsType | FormAction>
 
-type ContactsType = {
+export type ContactsType = {
     facebook?: string | null,
     website?: string | null,
     vk?: string | null,
@@ -109,4 +114,16 @@ export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
 export const savePhoto = (file: File) => async (dispatch: Dispatch) => {
     let response = await profileAPI.savePhoto(file)
     if (response.data.resultCode === 0) {dispatch(savePhotoSuccess(response.data.photos))}
+}
+export const saveProfile = (profile: ProfileType): ThunkType => async (dispatch, getState) => {
+    const id = getState().auth.id
+    const response = await profileAPI.saveProfile(profile)
+
+    if (response.resultCode === 0) {
+        if (id != null) {
+            dispatch(getProfile(id))
+        } else {
+            dispatch(stopSubmit("edit-profile", {_error: response.messages[0]}))
+        }
+    }
 }

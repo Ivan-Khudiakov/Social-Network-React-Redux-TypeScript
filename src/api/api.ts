@@ -1,10 +1,31 @@
 import axios from "axios";
+import {ProfileType} from "../redux/profile-reducer";
+import {UserType} from "../redux/users-reducer";
 
 const instance = axios.create({
     withCredentials: true,
     baseURL: "https://social-network.samuraijs.com/api/1.0/",
     headers: {"API-KEY": "32f3e865-c36d-45f2-8bd3-3a4a5b923e2a"}
 })
+export enum ResultCodesEnum {
+    Success = 0,
+    Error = 1
+}
+
+export enum ResultCodeForCapcthaEnum {
+    CaptchaIsRequired = 10
+}
+
+export type GetItemsType = {
+    items: Array<UserType>
+    totalCount: number
+    error: string | null
+}
+export type APIResponseType<D = {}, RC = ResultCodesEnum> = {
+    data: D
+    messages: Array<string>
+    resultCode: RC
+}
 
 export const usersAPI = {
     getUsers(currentPage: number, pageSize: number) {
@@ -18,7 +39,7 @@ export const usersAPI = {
     },
     unfollow(userId: number) {
         return instance.delete(`follow/${userId}`)
-    }
+    },
 }
 
 export const profileAPI = {
@@ -40,6 +61,9 @@ export const profileAPI = {
                 'Content-Type': 'multipart/form-data'
             }
         }).then(res => res.data)
+    },
+    saveProfile(profile: ProfileType) {
+        return instance.put<APIResponseType>(`profile`, profile).then(res => res.data);
     }
 }
 
